@@ -1,23 +1,105 @@
-# SuiviMariage
+# Système de Réservation de Mariages - Mairie du Plateau
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.1.3.
+## Description
 
-## Development server
+Application web de réservation de mariages en ligne pour la Mairie du Plateau à Abidjan, Côte d'Ivoire. Cette application permet aux citoyens de réserver leurs mariages civils en ligne et aux célébrants de gérer ces réservations.
 
-To start a local development server, run:
+## 🚀 Déploiement sur GitHub Pages
+
+Cette application est configurée pour être déployée automatiquement sur GitHub Pages via GitHub Actions.
+
+### Configuration requise
+
+1. **Permissions GitHub Actions** : Allez dans `Settings > Actions > General` et assurez-vous que les permissions d'écriture sont activées
+2. **GitHub Pages** : Allez dans `Settings > Pages` et sélectionnez `Deploy from a branch` puis `gh-pages` comme source
+
+### Déploiement automatique
+
+Le déploiement se fait automatiquement à chaque push sur la branche `main`. Le workflow GitHub Actions :
+- Installe les dépendances
+- Build l'application avec la configuration GitHub Pages
+- Déploie sur la branche `gh-pages`
+
+### Déploiement manuel
+
+Pour déployer manuellement depuis votre machine locale :
 
 ```bash
-ng serve
+# Installer les dépendances
+npm ci
+
+# Déployer sur GitHub Pages
+npm run deploy:gh-pages
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+### URL de l'application
 
-## Code scaffolding
+Une fois déployée, l'application sera accessible à l'adresse :
+`https://[votre-username].github.io/suivi-mariage/`
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Fonctionnalités
 
-```bash
-ng generate component component-name
+### Pour les Citoyens
+- ✅ **Réservation en ligne** : Formulaire complet pour réserver un mariage
+- ✅ **Sélection de créneaux** : Choix de date et heure parmi les créneaux disponibles
+- ✅ **Validation en temps réel** : Vérification des informations saisies
+- ✅ **Interface responsive** : Compatible mobile et desktop
+
+### Pour les Célébrants
+- ✅ **Dashboard de gestion** : Vue d'ensemble des mariages
+- ✅ **Gestion des statuts** : Confirmer, terminer ou annuler les mariages
+- ✅ **Système de messagerie** : Communication directe avec les futurs mariés
+- ✅ **Filtres et recherche** : Trouver rapidement les dossiers
+- ✅ **Statistiques** : Vue d'ensemble des activités
+
+### Fonctionnalités Générales
+- ✅ **Authentification** : Système de connexion sécurisé
+- ✅ **Interface moderne** : Design avec Tailwind CSS
+- ✅ **Navigation intuitive** : UX optimisée
+- ✅ **Gestion d'état** : Services Angular avec RxJS
+
+## Technologies Utilisées
+
+- **Frontend** : Angular 20 (dernière version)
+- **Styling** : Tailwind CSS 3.4.17
+- **Language** : TypeScript
+- **Formulaires** : Angular Reactive Forms
+- **Routing** : Angular Router avec Guards
+- **State Management** : Services Angular + RxJS
+
+## Nouvelles Syntaxes Angular Utilisées
+
+Le projet utilise les dernières syntaxes d'Angular :
+
+- ✅ **Directives de contrôle** : `@if`, `@for`, `@switch` au lieu de `*ngIf`, `*ngFor`
+- ✅ **Composants standalone** : Tous les composants sont standalone
+- ✅ **Signals** (prêt pour migration future)
+- ✅ **Nouvelle structure de fichiers** : Séparation template/component
+
+## Installation et Démarrage
+
+1. **Installer les dépendances**
+   ```bash
+   npm install
+   ```
+
+2. **Démarrer le serveur de développement**
+   ```bash
+   npm start
+   ```
+
+3. **Ouvrir l'application**
+   - Navigateur : `http://localhost:4200`
+
+## Comptes de Test
+
+### Célébrant
+- **Email** : `celebrant@mairie-plateau.ci`
+- **Mot de passe** : `password123`
+
+### Citoyen (pour tests)
+- **Email** : `citoyen@example.com`
+- **Mot de passe** : `password123`
 ```
 
 For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:

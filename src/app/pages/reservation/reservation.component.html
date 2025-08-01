@@ -1,0 +1,622 @@
+<div class="min-h-screen bg-gray-50 py-8">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Bouton retour -->
+    <div class="mb-6">
+      <a
+        routerLink="/"
+        class="inline-flex items-center text-gray-600 hover:text-primary-600 transition-colors"
+      >
+        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+        </svg>
+        Retour à l'accueil
+      </a>
+    </div>
+
+    <!-- En-tête -->
+    <div class="text-center mb-8">
+      <h1 class="text-3xl font-bold text-gray-900 mb-2">Mairie du Plateau</h1>
+      <h2 class="text-xl font-semibold text-primary-600 mb-4">Réservation de Mariage</h2>
+      <p class="text-gray-600 max-w-2xl mx-auto">
+        Réservez votre cérémonie de mariage en ligne. Veuillez remplir tous les champs requis 
+        et choisir une date et heure disponibles.
+      </p>
+    </div>
+
+    <!-- Formulaire principal -->
+    <div class="bg-white rounded-lg shadow-md p-6 md:p-8">
+      <form [formGroup]="reservationForm" (ngSubmit)="onSubmit()" class="space-y-8">
+        
+        <!-- Informations du marié -->
+        <div class="border-b border-gray-200 pb-6">
+          <h3 class="text-lg font-medium text-gray-900 mb-4">Informations du marié</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label for="groomFirstName" class="block text-sm font-medium text-gray-700 mb-2">
+                Prénom *
+              </label>
+              <input
+                id="groomFirstName"
+                type="text"
+                formControlName="groomFirstName"
+                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                placeholder="Prénom du marié"
+              >
+              @if (getFieldError('groomFirstName')) {
+                <p class="mt-1 text-sm text-red-600">{{ getFieldError('groomFirstName') }}</p>
+              }
+            </div>
+            
+            <div>
+              <label for="groomLastName" class="block text-sm font-medium text-gray-700 mb-2">
+                Nom *
+              </label>
+              <input
+                id="groomLastName"
+                type="text"
+                formControlName="groomLastName"
+                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                placeholder="Nom du marié"
+              >
+              @if (getFieldError('groomLastName')) {
+                <p class="mt-1 text-sm text-red-600">{{ getFieldError('groomLastName') }}</p>
+              }
+            </div>
+            
+            <div>
+              <label for="groomEmail" class="block text-sm font-medium text-gray-700 mb-2">
+                Email *
+              </label>
+              <input
+                id="groomEmail"
+                type="email"
+                formControlName="groomEmail"
+                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                placeholder="email@exemple.com"
+              >
+              @if (getFieldError('groomEmail')) {
+                <p class="mt-1 text-sm text-red-600">{{ getFieldError('groomEmail') }}</p>
+              }
+            </div>
+            
+            <div>
+              <label for="groomPhone" class="block text-sm font-medium text-gray-700 mb-2">
+                Téléphone *
+              </label>
+              <input
+                id="groomPhone"
+                type="tel"
+                formControlName="groomPhone"
+                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                placeholder="+225 XX XX XX XX XX"
+              >
+              @if (getFieldError('groomPhone')) {
+                <p class="mt-1 text-sm text-red-600">{{ getFieldError('groomPhone') }}</p>
+              }
+            </div>
+          </div>
+        </div>
+
+        <!-- Informations de la mariée -->
+        <div class="border-b border-gray-200 pb-6">
+          <h3 class="text-lg font-medium text-gray-900 mb-4">Informations de la mariée</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label for="brideFirstName" class="block text-sm font-medium text-gray-700 mb-2">
+                Prénom *
+              </label>
+              <input
+                id="brideFirstName"
+                type="text"
+                formControlName="brideFirstName"
+                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                placeholder="Prénom de la mariée"
+              >
+              @if (getFieldError('brideFirstName')) {
+                <p class="mt-1 text-sm text-red-600">{{ getFieldError('brideFirstName') }}</p>
+              }
+            </div>
+            
+            <div>
+              <label for="brideLastName" class="block text-sm font-medium text-gray-700 mb-2">
+                Nom *
+              </label>
+              <input
+                id="brideLastName"
+                type="text"
+                formControlName="brideLastName"
+                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                placeholder="Nom de la mariée"
+              >
+              @if (getFieldError('brideLastName')) {
+                <p class="mt-1 text-sm text-red-600">{{ getFieldError('brideLastName') }}</p>
+              }
+            </div>
+            
+            <div>
+              <label for="brideEmail" class="block text-sm font-medium text-gray-700 mb-2">
+                Email *
+              </label>
+              <input
+                id="brideEmail"
+                type="email"
+                formControlName="brideEmail"
+                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                placeholder="email@exemple.com"
+              >
+              @if (getFieldError('brideEmail')) {
+                <p class="mt-1 text-sm text-red-600">{{ getFieldError('brideEmail') }}</p>
+              }
+            </div>
+            
+            <div>
+              <label for="bridePhone" class="block text-sm font-medium text-gray-700 mb-2">
+                Téléphone *
+              </label>
+              <input
+                id="bridePhone"
+                type="tel"
+                formControlName="bridePhone"
+                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                placeholder="+225 XX XX XX XX XX"
+              >
+              @if (getFieldError('bridePhone')) {
+                <p class="mt-1 text-sm text-red-600">{{ getFieldError('bridePhone') }}</p>
+              }
+            </div>
+          </div>
+        </div>
+
+        <!-- Date et heure du mariage -->
+        <div class="pb-6">
+          <h3 class="text-lg font-medium text-gray-900 mb-4">Date et heure du mariage</h3>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Sélection de la date -->
+            <div>
+              <label for="weddingDate" class="block text-sm font-medium text-gray-700 mb-2">
+                Date souhaitée *
+              </label>
+              <input
+                id="weddingDate"
+                type="date"
+                formControlName="weddingDate"
+                [min]="minDate"
+                (change)="onDateChange()"
+                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+              >
+              @if (getFieldError('weddingDate')) {
+                <p class="mt-1 text-sm text-red-600">{{ getFieldError('weddingDate') }}</p>
+              }
+            </div>
+
+            <!-- Sélection de l'heure -->
+            <div>
+              <label for="weddingTime" class="block text-sm font-medium text-gray-700 mb-2">
+                Heure souhaitée *
+              </label>
+              <select
+                id="weddingTime"
+                formControlName="weddingTime"
+                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+              >
+                <option value="">Sélectionnez une heure</option>
+                @for (time of availableTimes; track time) {
+                  <option [value]="time">{{ time }}</option>
+                }
+              </select>
+              @if (getFieldError('weddingTime')) {
+                <p class="mt-1 text-sm text-red-600">{{ getFieldError('weddingTime') }}</p>
+              }
+              @if (availableTimes.length === 0 && reservationForm.get('weddingDate')?.value) {
+                <p class="mt-1 text-sm text-orange-600">
+                  Aucun créneau disponible pour cette date. Veuillez choisir une autre date.
+                </p>
+              }
+            </div>
+          </div>
+
+          <!-- Informations sur les disponibilités -->
+          <div class="mt-4 p-4 bg-blue-50 rounded-md">
+            <div class="flex">
+              <div class="flex-shrink-0">
+                <svg class="h-5 w-5 text-blue-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+                </svg>
+              </div>
+              <div class="ml-3">
+                <p class="text-sm text-blue-700">
+                  <strong>Horaires disponibles :</strong> Les mariages sont célébrés du lundi au samedi, 
+                  de 9h à 16h. Les dimanches et jours fériés sont fermés.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Upload des documents -->
+        <div class="border-b border-gray-200 pb-6">
+          <h3 class="text-lg font-medium text-gray-900 mb-4">Documents nécessaires</h3>
+          <p class="text-sm text-gray-600 mb-6">
+            Veuillez télécharger les documents suivants. Formats acceptés : PDF, JPG, PNG (max 5MB par fichier)
+          </p>
+
+          <div class="space-y-6">
+            <!-- Documents du marié -->
+            <div class="bg-blue-50 rounded-lg p-4">
+              <h4 class="text-md font-semibold text-gray-900 mb-4 flex items-center">
+                <svg class="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                </svg>
+                Documents du marié
+              </h4>
+              
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <!-- CNI du marié -->
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-2">
+                    Carte nationale d'identité *
+                  </label>
+                  <div class="relative">
+                    <input
+                      type="file"
+                      (change)="onFileSelected($event, 'groomId')"
+                      accept=".pdf,.jpg,.jpeg,.png"
+                      class="hidden"
+                      #groomIdInput
+                    >
+                    <button
+                      type="button"
+                      (click)="groomIdInput.click()"
+                      class="w-full flex items-center justify-center px-4 py-3 border-2 border-dashed border-gray-300 rounded-lg hover:border-primary-400 hover:bg-gray-50 transition-colors"
+                    >
+                      <div class="text-center">
+                        @if (uploadedFiles['groomId']) {
+                          <div class="flex items-center text-green-600">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            <span class="text-sm">{{ uploadedFiles['groomId'].name }}</span>
+                          </div>
+                        } @else {
+                          <div class="flex items-center text-gray-600">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+                            </svg>
+                            <span class="text-sm">Cliquer pour télécharger</span>
+                          </div>
+                        }
+                      </div>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Extrait de naissance du marié -->
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-2">
+                    Extrait de naissance *
+                  </label>
+                  <div class="relative">
+                    <input
+                      type="file"
+                      (change)="onFileSelected($event, 'groomBirth')"
+                      accept=".pdf,.jpg,.jpeg,.png"
+                      class="hidden"
+                      #groomBirthInput
+                    >
+                    <button
+                      type="button"
+                      (click)="groomBirthInput.click()"
+                      class="w-full flex items-center justify-center px-4 py-3 border-2 border-dashed border-gray-300 rounded-lg hover:border-primary-400 hover:bg-gray-50 transition-colors"
+                    >
+                      <div class="text-center">
+                        @if (uploadedFiles['groomBirth']) {
+                          <div class="flex items-center text-green-600">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            <span class="text-sm">{{ uploadedFiles['groomBirth'].name }}</span>
+                          </div>
+                        } @else {
+                          <div class="flex items-center text-gray-600">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+                            </svg>
+                            <span class="text-sm">Cliquer pour télécharger</span>
+                          </div>
+                        }
+                      </div>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Documents de la mariée -->
+            <div class="bg-pink-50 rounded-lg p-4">
+              <h4 class="text-md font-semibold text-gray-900 mb-4 flex items-center">
+                <svg class="w-5 h-5 mr-2 text-pink-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                </svg>
+                Documents de la mariée
+              </h4>
+              
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <!-- CNI de la mariée -->
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-2">
+                    Carte nationale d'identité *
+                  </label>
+                  <div class="relative">
+                    <input
+                      type="file"
+                      (change)="onFileSelected($event, 'brideId')"
+                      accept=".pdf,.jpg,.jpeg,.png"
+                      class="hidden"
+                      #brideIdInput
+                    >
+                    <button
+                      type="button"
+                      (click)="brideIdInput.click()"
+                      class="w-full flex items-center justify-center px-4 py-3 border-2 border-dashed border-gray-300 rounded-lg hover:border-primary-400 hover:bg-gray-50 transition-colors"
+                    >
+                      <div class="text-center">
+                        @if (uploadedFiles['brideId']) {
+                          <div class="flex items-center text-green-600">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            <span class="text-sm">{{ uploadedFiles['brideId'].name }}</span>
+                          </div>
+                        } @else {
+                          <div class="flex items-center text-gray-600">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+                            </svg>
+                            <span class="text-sm">Cliquer pour télécharger</span>
+                          </div>
+                        }
+                      </div>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Extrait de naissance de la mariée -->
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-2">
+                    Extrait de naissance *
+                  </label>
+                  <div class="relative">
+                    <input
+                      type="file"
+                      (change)="onFileSelected($event, 'brideBirth')"
+                      accept=".pdf,.jpg,.jpeg,.png"
+                      class="hidden"
+                      #brideBirthInput
+                    >
+                    <button
+                      type="button"
+                      (click)="brideBirthInput.click()"
+                      class="w-full flex items-center justify-center px-4 py-3 border-2 border-dashed border-gray-300 rounded-lg hover:border-primary-400 hover:bg-gray-50 transition-colors"
+                    >
+                      <div class="text-center">
+                        @if (uploadedFiles['brideBirth']) {
+                          <div class="flex items-center text-green-600">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            <span class="text-sm">{{ uploadedFiles['brideBirth'].name }}</span>
+                          </div>
+                        } @else {
+                          <div class="flex items-center text-gray-600">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+                            </svg>
+                            <span class="text-sm">Cliquer pour télécharger</span>
+                          </div>
+                        }
+                      </div>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Documents optionnels -->
+            <div class="bg-gray-50 rounded-lg p-4">
+              <h4 class="text-md font-semibold text-gray-900 mb-4 flex items-center">
+                <svg class="w-5 h-5 mr-2 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                </svg>
+                Documents optionnels
+              </h4>
+              
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <!-- Certificat de divorce/veuvage -->
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-2">
+                    Certificat de divorce/veuvage (si applicable)
+                  </label>
+                  <div class="relative">
+                    <input
+                      type="file"
+                      (change)="onFileSelected($event, 'divorceDoc')"
+                      accept=".pdf,.jpg,.jpeg,.png"
+                      class="hidden"
+                      #divorceDocInput
+                    >
+                    <button
+                      type="button"
+                      (click)="divorceDocInput.click()"
+                      class="w-full flex items-center justify-center px-4 py-3 border-2 border-dashed border-gray-300 rounded-lg hover:border-primary-400 hover:bg-gray-50 transition-colors"
+                    >
+                      <div class="text-center">
+                        @if (uploadedFiles['divorceDoc']) {
+                          <div class="flex items-center text-green-600">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            <span class="text-sm">{{ uploadedFiles['divorceDoc'].name }}</span>
+                          </div>
+                        } @else {
+                          <div class="flex items-center text-gray-600">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+                            </svg>
+                            <span class="text-sm">Cliquer pour télécharger</span>
+                          </div>
+                        }
+                      </div>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Autres documents -->
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-2">
+                    Autres documents
+                  </label>
+                  <div class="relative">
+                    <input
+                      type="file"
+                      (change)="onFileSelected($event, 'otherDoc')"
+                      accept=".pdf,.jpg,.jpeg,.png"
+                      class="hidden"
+                      #otherDocInput
+                    >
+                    <button
+                      type="button"
+                      (click)="otherDocInput.click()"
+                      class="w-full flex items-center justify-center px-4 py-3 border-2 border-dashed border-gray-300 rounded-lg hover:border-primary-400 hover:bg-gray-50 transition-colors"
+                    >
+                      <div class="text-center">
+                        @if (uploadedFiles['otherDoc']) {
+                          <div class="flex items-center text-green-600">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            <span class="text-sm">{{ uploadedFiles['otherDoc'].name }}</span>
+                          </div>
+                        } @else {
+                          <div class="flex items-center text-gray-600">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+                            </svg>
+                            <span class="text-sm">Cliquer pour télécharger</span>
+                          </div>
+                        }
+                      </div>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Indicateur de progression -->
+            @if (uploadProgress > 0 && uploadProgress < 100) {
+              <div class="bg-blue-50 rounded-lg p-4">
+                <div class="flex items-center justify-between mb-2">
+                  <span class="text-sm font-medium text-blue-900">Téléchargement en cours...</span>
+                  <span class="text-sm font-medium text-blue-900">{{ uploadProgress }}%</span>
+                </div>
+                <div class="w-full bg-blue-200 rounded-full h-2">
+                  <div 
+                    class="bg-blue-600 h-2 rounded-full transition-all duration-300" 
+                    [style.width.%]="uploadProgress"
+                  ></div>
+                </div>
+              </div>
+            }
+
+            <!-- Messages d'information -->
+            <div class="bg-amber-50 border border-amber-200 rounded-lg p-4">
+              <div class="flex">
+                <div class="flex-shrink-0">
+                  <svg class="h-5 w-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+                  </svg>
+                </div>
+                <div class="ml-3">
+                  <p class="text-sm text-amber-700">
+                    <strong>Important :</strong> Les documents marqués d'un astérisque (*) sont obligatoires. 
+                    Assurez-vous que tous les documents sont lisibles et non expirés.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Messages d'erreur ou de succès -->
+        @if (errorMessage) {
+          <div class="bg-red-50 border border-red-200 rounded-md p-4">
+            <div class="flex">
+              <div class="flex-shrink-0">
+                <svg class="h-5 w-5 text-red-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path>
+                </svg>
+              </div>
+              <div class="ml-3">
+                <p class="text-sm text-red-700">{{ errorMessage }}</p>
+              </div>
+            </div>
+          </div>
+        }
+
+        @if (successMessage) {
+          <div class="bg-green-50 border border-green-200 rounded-md p-4">
+            <div class="flex">
+              <div class="flex-shrink-0">
+                <svg class="h-5 w-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                </svg>
+              </div>
+              <div class="ml-3">
+                <p class="text-sm text-green-700">{{ successMessage }}</p>
+              </div>
+            </div>
+          </div>
+        }
+
+        <!-- Boutons d'action -->
+        <div class="flex flex-col sm:flex-row gap-4 pt-6">
+          <button
+            type="submit"
+            [disabled]="reservationForm.invalid || isLoading"
+            class="flex-1 bg-primary-600 text-white py-3 px-6 rounded-md font-medium hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          >
+            @if (isLoading) {
+              <div class="flex items-center justify-center">
+                <svg class="animate-spin h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24">
+                  <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                  <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                Envoi en cours...
+              </div>
+            } @else {
+              Réserver le mariage
+            }
+          </button>
+          
+          <button
+            type="button"
+            (click)="resetForm()"
+            class="flex-1 sm:flex-none px-6 py-3 border border-gray-300 text-gray-700 rounded-md font-medium hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 transition-colors"
+          >
+            Réinitialiser
+          </button>
+        </div>
+
+        <!-- Lien vers la connexion -->
+        <div class="text-center pt-4 border-t border-gray-200">
+          <p class="text-sm text-gray-600">
+            Vous êtes un célébrant ? 
+            <a routerLink="/login" class="font-medium text-primary-600 hover:text-primary-500">
+              Connectez-vous ici
+            </a>
+          </p>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
