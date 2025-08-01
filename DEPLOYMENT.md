@@ -9,6 +9,12 @@
 
 ### 2. Activer GitHub Pages
 
+**Option A - GitHub Pages Native (Recommandé)**
+1. Allez dans les **Settings** de votre repository
+2. Naviguez vers **Pages** dans le menu de gauche
+3. Dans **Source**, sélectionnez **GitHub Actions**
+
+**Option B - Déploiement via branche gh-pages**
 1. Allez dans les **Settings** de votre repository
 2. Naviguez vers **Pages** dans le menu de gauche
 3. Dans **Source**, sélectionnez **Deploy from a branch**
@@ -27,7 +33,9 @@
 
 Le déploiement se fait automatiquement à chaque push sur la branche `main` grâce à GitHub Actions.
 
-**Workflow** : `.github/workflows/deploy.yml`
+**Deux workflows disponibles** :
+- `deploy-native.yml` : Utilise GitHub Pages native (recommandé)
+- `deploy.yml` : Utilise la branche gh-pages (traditionnel)
 
 ### Déploiement manuel
 
@@ -46,17 +54,32 @@ Une fois déployé, votre application sera accessible à :
 https://[votre-username].github.io/suivi-mariage/
 ```
 
-## Dépannage
+## Résolution des problèmes
 
-### Problème : Page blanche après déploiement
+### ❌ Problème : La branche gh-pages n'est pas créée
+
+**Solution** : 
+1. **Recommandé** : Utilisez le workflow `deploy-native.yml` (GitHub Pages native)
+   - Allez dans Settings > Pages et sélectionnez "GitHub Actions"
+2. **Alternative** : Le workflow `deploy.yml` va créer automatiquement la branche avec `force_orphan: true`
+3. Vérifiez que les permissions GitHub Actions sont correctes (voir ci-dessous)
+
+### ❌ Problème : Erreur de permissions
+
+**Solution** :
+1. Allez dans Settings > Actions > General
+2. Sélectionnez "Read and write permissions"
+3. Les workflows incluent maintenant les permissions nécessaires dans le fichier YAML
+
+### ❌ Problème : Page blanche après déploiement
 - Vérifiez que le `base-href` est correct dans `build:gh-pages`
-- Assurez-vous que GitHub Pages est activé et configuré sur la branche `gh-pages`
+- Assurez-vous que GitHub Pages est activé et configuré correctement
 
-### Problème : Routes Angular ne fonctionnent pas
+### ❌ Problème : Routes Angular ne fonctionnent pas
 - Le fichier `404.html` est configuré pour rediriger vers l'application Angular
 - Vérifiez que le script dans `index.html` est présent
 
-### Problème : GitHub Actions échoue
+### ❌ Problème : GitHub Actions échoue
 - Vérifiez les permissions dans Settings > Actions > General
 - Consultez les logs dans l'onglet Actions de votre repository
 
