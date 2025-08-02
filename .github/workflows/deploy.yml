@@ -1,22 +1,17 @@
-name: Deploy to GitHub Pages
+name: Deploy to GitHub Pages (Create gh-pages branch)
 
 on:
   push:
     branches: [ main ]
 
-# Permissions nécessaires pour GitHub Pages
+# Permissions nécessaires pour créer la branche gh-pages
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
-# Autoriser un seul déploiement concurrent
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
-
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
     
     steps:
@@ -33,24 +28,14 @@ jobs:
       run: npm ci
       
     - name: Build
-      run: npm run build:github
+      run: npm run build:gh-pages
       
-    - name: Setup Pages
-      uses: actions/configure-pages@v4
-      
-    - name: Upload artifact
-      uses: actions/upload-pages-artifact@v3
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v4
+      if: github.ref == 'refs/heads/main'
       with:
-        path: ./dist/suivi-mariage/browser
-
-  # Job de déploiement
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./dist/suivi-mariage/browser
+        force_orphan: true
+        user_name: 'github-actions[bot]'
+        user_email: 'github-actions[bot]@users.noreply.github.com'
