@@ -9,7 +9,7 @@
     "build:gh-pages": "ng build --configuration production --base-href /suivi-mariage/",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "deploy:gh-pages": "npm run build:gh-pages && npx angular-cli-ghpages --dir=dist/suivi-mariage"
+    "deploy:gh-pages": "npm run build:gh-pages && npx angular-cli-ghpages --dir=dist/suivi-mariage/browser"
   },
   "prettier": {
     "overrides": [
